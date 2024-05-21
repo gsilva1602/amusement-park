@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <!-- Bootstrap CSS -->
+     <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.css">
+     <link rel="stylesheet" href="/static/form.css">
+    <title>Parque de Diversões</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Fila do Brinquedo {{ toy }}</h1>
+        <div class="form-container">
+            <h2>Cadastrar na Fila</h2>
+            <p>Digite seu nome e telefone para entrar na fila</p>
+            {% if warning %}
+            <p class="text-danger">{{ warning }}</p>
+            {% endif %}
+            {% if toy == "A" %}
+            <form method="POST" action="{{ url_for('register_toy_a', toy=toy) }}">
+            {% elif toy == 'B' %}
+            <form method="POST" action="{{ url_for('register_toy_b', toy=toy) }}">
+            {% elif toy == 'C' %}
+            <form method="POST" action="{{ url_for('register_toy_c', toy=toy) }}">
+            {% endif %}
+                <div class="form-group">
+                    <input type="text" id="name" name="name" class="form-control" placeholder="Nome" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" id="number" name="number" class="form-control" placeholder="Telefone" required>
+                </div>
+                <div class="btn-group">
+                    <button type="submit" class="btn btn-submit">Entrar</button>
+                    <a href="/" class="btn btn-back">Voltar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

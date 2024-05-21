@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="/static/position.css">
+    <title>Fila</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Fila do Brinquedo {{ toy }}</h1>
+        <p class="message">Olá, {{ name }}.<br>Você entrou na fila com sucesso!</p>
+        <p class="message">Você está na posição <span class="position">{{ position }}</span> da fila.</p>
+        {% if position == 1 %}
+        <p class="alert">ATENÇÃO!<br>Fique atento, você é o próximo.</p>
+        {% endif %}
+        <form action="{{ url_for('leave_line', toy=toy, number=number) }}", method="POST">
+            <button type="submit" class="btn-leave">Sair da Fila</button>
+        </form>
+    </div>
+</body>
+</html>
