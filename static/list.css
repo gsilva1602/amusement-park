@@ -86,15 +86,3 @@ th.id-column, td.id-column {
 .btn-delete:hover {
     background-color: #333;
 }
-
-.empty-message, .center-message {
-    text-align: center;
-    font-size: 1.5rem;
-    margin-top: 20px;
-    color: gray;
-}
-
-.center-message {
-    height: 100vh;
-    font-size: 2em;
-}
