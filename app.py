@@ -7,9 +7,9 @@ import os
 # Configurating falsk app and the SQLAlchemy
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///dados.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
 db = SQLAlchemy(app)
-migrate = Migrate(app, db, directory='migrations')
+migrate = Migrate(app, db)
 
 
 # Configurating data model
@@ -52,6 +52,7 @@ with app.app_context():
     db.create_all()
 
 
+# Checking if the cellphone number is in line 
 def is_number_in_line(number):
     if LineA.query.filter_by(number=number).first():
         return True
@@ -65,6 +66,7 @@ def is_number_in_line(number):
     return False
 
 
+# Changing the name "Toy" to "Brinquedo"
 def map_toy_name(db_toy_name):
     if db_toy_name == "Toy A":
         return "Brinquedo A"
@@ -80,6 +82,7 @@ def home():
     return render_template('home.html')
 
 
+# Function to leave of the line if the user wants
 @app.route('/leave_line/<toy>/<string:number>', methods=['POST'])
 def leave_line(toy, number):
     if toy == 'A':
@@ -100,6 +103,7 @@ def leave_line(toy, number):
         return 'Registro não encontrado na fila'
 
 
+# If the administrator wants delete an user
 @app.route('/delete_user', methods=['POST'])
 def delete_user():
     toy = request.form.get('toy')
@@ -130,6 +134,7 @@ def list():
     return render_template('list.html', toy_lines=toy_lines, selected_toy=None, all_toys=all_toys)
 
 
+# Place where the admin can see the people subscribed on the line
 @app.route('/list/<toy_name>')
 def list_toy(toy_name):
     if toy_name == 'Brinquedo A':
@@ -151,6 +156,8 @@ def list_toy(toy_name):
 
     return render_template('list.html', toy_lines=toy_lines, selected_toy=toy_name, all_toys=all_toys)
 
+
+# Home page where the user can choose the toy that they want
 @app.route('/choose_toy', methods=['POST'])
 def choose_toy():
     selected_toy = request.form.get('toy')
@@ -162,7 +169,7 @@ def choose_toy():
         return redirect(url_for('register_toy_c', toy=selected_toy))
 
 
-# Check the line position
+# Check the line position from Toy A
 @app.route('/position_toy_a/<string:number>')
 def position_toy_a(number):
     line = LineA.query.filter_by(number=number).first()
@@ -173,6 +180,7 @@ def position_toy_a(number):
         return render_template('home.html')
     
 
+# Check the line position from Toy B
 @app.route('/position_toy_b/<string:number>')
 def position_toy_b(number):
     line = LineB.query.filter_by(number=number).first()
@@ -183,6 +191,7 @@ def position_toy_b(number):
         return render_template('home.html')
     
 
+# Check the line position from Toy C
 @app.route('/position_toy_c/<string:number>')
 def position_toy_c(number):
     line = LineC.query.filter_by(number=number).first()
@@ -193,6 +202,7 @@ def position_toy_c(number):
         return render_template('home.html')
         
 
+# Where an user can subscribe to enter in the Toy A line
 @app.route('/register_toy_a', methods=['GET', 'POST'])
 def register_toy_a():
     if ToyA.query.count() == 0:
@@ -228,6 +238,7 @@ def register_toy_a():
     return render_template('form.html', toy='A')
 
 
+# Where an user can subscribe to enter in the Toy B line
 @app.route('/register_toy_b', methods=['GET', 'POST'])
 def register_toy_b():
     if ToyB.query.count() == 0:
@@ -263,6 +274,7 @@ def register_toy_b():
     return render_template('form.html', toy='B')
 
 
+# Where an user can subscribe to enter in the Toy C line
 @app.route('/register_toy_c', methods=['GET', 'POST'])
 def register_toy_c():
     if ToyC.query.count() == 0:
@@ -298,6 +310,7 @@ def register_toy_c():
     return render_template('form.html', toy='C')
 
 
+# Run time
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port, debug=True)
