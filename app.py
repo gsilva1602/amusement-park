@@ -146,6 +146,9 @@ def list_toy(toy_name):
     else:
         return 'Brinquedo não encontrado.'
     
+    if toy is None:
+        return 'Brinquedo não encontrado no banco de dados.'
+    
     lines = []
     if toy:
         for line in toy.lines:
