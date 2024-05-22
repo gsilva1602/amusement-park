@@ -92,6 +92,31 @@ body {
     margin-top: 100px;
 }
 
+.box {
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    transition: transform 0.3s, font-size 0.3s;
+    text-align: left;
+}
+
+.box img {
+    width: 100%;
+    height: auto;
+    transition: transform 0.3s;
+}
+
+.box h3, .box p {
+    transition: transform 0.3s;
+}
+
+.box:hover {
+    transform: scale(1.05);
+}
+
+.box:hover img {
+    transform: scale(1.05);
+}
+
 h3 {
     font-size: 1.3rem;
     margin-bottom: 0;
@@ -106,20 +131,4 @@ p {
 .text-decoration-none {
     text-decoration: none;
     color: inherit;
-}
-
-.img-fluid {
-    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-    width: 100%;
-    height: auto;
-    transition: transform 0.3s ease;
-}
-
-.img-fluid:hover {
-    transform: scale(1.05);
-}
-
-.toy-image {
-    max-width: 100%;
-    height: auto;
 }
