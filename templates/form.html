@@ -11,6 +11,9 @@
 <body>
     <div class="container">
         <h1>Fila do Brinquedo {{ toy }}</h1>
+        <div class="image-container">
+            <img src="{{ url_for('static', filename='img/brinquedo_' + toy|lower + '.jpg') }}" alt="Brinquedo {{ toy }}" class="img-fluid toy-image">
+        </div>
         <div class="form-container">
             <h2>Cadastrar na Fila</h2>
             <p>Digite seu nome e telefone para entrar na fila</p>

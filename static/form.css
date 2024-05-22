@@ -17,34 +17,33 @@ body, html {
 }
 
 h1 {
-    margin-bottom: 150px;
-    font-size: 30px;
+    margin-top: 20px;
+    margin-bottom: 20px;
     font-weight: 600;
+    color: #333;
+}
+
+.image-container {
+    margin-bottom: 20px;
 }
 
 .form-container {
-    background: #ffffff;
+    background: white;
     padding: 20px;
     text-align: center;
 }
 
 .form-container h2 {
     margin-bottom: 10px;
-    font-size: 24px;
-    font-weight: 600;
 }
 
-.form-container p {
+.fork-container p {
     margin-bottom: 20px;
     color: #6c757d;
 }
 
 .form-group {
     margin-bottom: 15px;
-}
-
-.form-group label {
-    display: block;
     text-align: left;
 }
 
@@ -71,4 +70,14 @@ h1 {
 .btn-submit:hover {
     background-color: #b3b3b3;
     color: #000000;
+}
+
+.toy-image {
+    max-width: 50%;
+    height: auto;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.image-container {
+    text-align: center;
 }
